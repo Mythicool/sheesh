@@ -20,7 +20,7 @@ const Hero = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [features.length]);
 
   const scrollToReservation = () => {
     const element = document.getElementById('reservation');

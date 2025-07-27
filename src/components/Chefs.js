@@ -50,9 +50,9 @@ const Chefs = () => {
                 <p className="description">{chef.description}</p>
                 
                 <div className="chef-social">
-                  <a href="#" aria-label="Facebook">📘</a>
-                  <a href="#" aria-label="Twitter">🐦</a>
-                  <a href="#" aria-label="Instagram">📷</a>
+                  <button type="button" aria-label="Facebook">📘</button>
+                  <button type="button" aria-label="Twitter">🐦</button>
+                  <button type="button" aria-label="Instagram">📷</button>
                 </div>
               </div>
             </div>
