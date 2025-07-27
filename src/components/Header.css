@@ -3,17 +3,20 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 1000;
-  transition: var(--transition);
-  padding: 15px 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(231, 39, 45, 0.1);
 }
 
 .header.scrolled {
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: var(--shadow);
-  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(231, 39, 45, 0.2);
 }
 
 .header-content {
@@ -22,61 +25,143 @@
   justify-content: space-between;
 }
 
-.logo h1 {
+.logo {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition);
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-icon {
+  font-size: 2.2rem;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(231, 39, 45, 0.3));
+}
+
+.logo-text h1 {
   font-size: 1.8rem;
   color: var(--primary-color);
   margin-bottom: 0;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
 }
 
-.logo span {
-  font-size: 0.9rem;
+.logo-text span {
+  font-size: 0.85rem;
   color: var(--text-light);
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
 }
 
 .nav {
   display: flex;
-  gap: 30px;
+  gap: 35px;
 }
 
 .nav a {
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 500;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
 }
 
 .nav a:hover {
   color: var(--primary-color);
+  background: rgba(231, 39, 45, 0.08);
+  transform: translateY(-1px);
+}
+
+.nav a.active {
+  color: var(--primary-color);
+  background: rgba(231, 39, 45, 0.12);
+  font-weight: 600;
 }
 
 .nav a::after {
   content: '';
   position: absolute;
-  bottom: -5px;
-  left: 0;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
-  height: 2px;
-  background: var(--primary-color);
-  transition: var(--transition);
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav a:hover::after {
-  width: 100%;
+.nav a:hover::after,
+.nav a.active::after {
+  width: 60%;
+}
+
+.nav a.active::after {
+  width: 80%;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
 }
 
 .phone-link {
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: 2px solid var(--primary-color);
+  border-radius: 30px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(231, 39, 45, 0.05);
+  white-space: nowrap;
+}
+
+.phone-link:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(231, 39, 45, 0.3);
+}
+
+.phone-icon {
   font-size: 1.1rem;
+  animation: ring 2s ease-in-out infinite;
+}
+
+.phone-number {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+@keyframes ring {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(-10deg); }
+  20% { transform: rotate(10deg); }
 }
 
 .mobile-menu-toggle {
@@ -85,37 +170,88 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
-}
-
-.mobile-menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background: var(--text-dark);
-  margin: 3px 0;
+  padding: 8px;
+  border-radius: 8px;
   transition: var(--transition);
 }
 
+.mobile-menu-toggle:hover {
+  background: rgba(231, 39, 45, 0.1);
+}
+
+.mobile-menu-toggle span {
+  width: 28px;
+  height: 3px;
+  background: var(--text-dark);
+  margin: 3px 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+  background: var(--primary-color);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+  background: var(--primary-color);
+}
+
 @media (max-width: 768px) {
+  .header {
+    padding: 15px 0;
+  }
+  
+  .header.scrolled {
+    padding: 10px 0;
+  }
+
   .nav {
     position: fixed;
-    top: 70px;
+    top: 75px;
     left: 0;
     right: 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: 20px;
-    box-shadow: var(--shadow);
+    padding: 30px 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 0;
   }
 
   .nav.nav-open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
+  }
+
+  .nav a {
+    padding: 15px 20px;
+    margin: 5px 0;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.1rem;
+    border: 1px solid transparent;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    background: rgba(231, 39, 45, 0.1);
+    border-color: rgba(231, 39, 45, 0.2);
+  }
+
+  .nav a::after {
+    display: none;
   }
 
   .mobile-menu-toggle {
@@ -126,7 +262,15 @@
     display: none;
   }
 
-  .logo h1 {
+  .logo-text h1 {
     font-size: 1.5rem;
+  }
+
+  .logo-text span {
+    font-size: 0.75rem;
+  }
+
+  .logo-icon {
+    font-size: 1.8rem;
   }
 }

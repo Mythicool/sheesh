@@ -1,19 +1,6 @@
 name = "sheesh-mahal-restaurant"
 compatibility_date = "2024-01-01"
+pages_build_output_dir = "build"
 
 [build]
 command = "npm run build"
-cwd = "."
-watch_dir = "src"
-
-[build.upload]
-format = "service-worker"
-dir = "build"
-
-[[build.upload.rules]]
-type = "Text"
-globs = ["**/*.html", "**/*.txt"]
-
-[[build.upload.rules]]
-type = "Data"
-globs = ["**/*"]
